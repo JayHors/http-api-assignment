@@ -1,0 +1,26 @@
+{
+  "name": "http-api-assignment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/server.js",
+  "scripts": {
+    "start": "node ./src/server.js",
+    "pretest": "eslint ./src --fix",
+    "test": "echo \"Tests completed\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JayHors/http-api-assignment.git"
+  },
+  "author": "Jay Horsfall",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/JayHors/http-api-assignment/issues"
+  },
+  "homepage": "https://github.com/JayHors/http-api-assignment#readme",
+  "devDependencies": {
+    "eslint": "^8.8.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.25.4"
+  }
+}
