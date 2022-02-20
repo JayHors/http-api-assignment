@@ -1,13 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Our simple HTTP server</title>
   <link rel="stylesheet" type="text/css" href="/style.css">
-  
+
   <script>
 
+
+    window.onload = () => {
+      const contentTag = document.querySelector('#content');
+      const sendBtn = document.querySelector('#send');
+      const pageVal = document.querySelector('#page');
+      const typeVal = document.querySelector('#type');
+      let statustext;
+      async function clicky() {
+        let options = {
+          method: 'GET',
+          cache: 'default',
+          headers: {
+            accept: typeVal.value,
+          },
+        };
+        fetch(pageVal.value, options)
+          .then(response =>{
+            statustext = response.statusText;
+            return response.json();
+          })
+          .then(jsoned =>{
+            contentTag.innerHTML = `<b>${statustext}</b><p>${jsoned.message}</p>`;
+          });
+      }
+      sendBtn.onclick = clicky;
+    }
   </script>
 </head>
+
 <body>
   <section id="top">
     <h3>Status Code Tests</h3>
@@ -29,4 +57,5 @@
   <section id="content">
   </section>
 </body>
+
 </html>

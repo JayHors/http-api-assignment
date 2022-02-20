@@ -6,19 +6,20 @@ const jsonHandler = require('./jsonResponses.js');
 const port = process.env.PORT || process.env.NODE_PORT || 3500;
 
 const urlHandles = {
-    'GET': {
-        '/': fileHandler.getIndex,
-        '/style.css': fileHandler.getCSS,
-        notFound: fileHandler.notFound,
-      },
-      'HEAD': {
-        notFound: jsonHandler.notFoundMeta,
-      },
+  GET: {
+    '/': fileHandler.getIndex,
+    '/style.css': fileHandler.getCSS,
+    '/success': jsonHandler.success,
+    '/internal': jsonHandler.internalServerError,
+    '/forbidden': jsonHandler.forbidden,
+    '/notImplemented': jsonHandler.notImplemented,
+    '/badRequest': jsonHandler.badRequest,
+    notFound: jsonHandler.notFound,
+  },
 };
 
 function onRequest(request, response) {
-  console.log(request.url);
-  const parsedUrl = new url.URL(request.url, 'https://media-streaming-jay-98741.herokuapp.com/');
+  const parsedUrl = new url.URL(request.url, 'https://http-api-1-jayhors.herokuapp.com/');
 
   if (urlHandles[request.method][parsedUrl.pathname]) {
     urlHandles[request.method][parsedUrl.pathname](request, response);
