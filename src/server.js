@@ -14,13 +14,13 @@ const urlHandles = {
     '/forbidden': jsonHandler.forbidden,
     '/notImplemented': jsonHandler.notImplemented,
     '/badRequest': jsonHandler.badRequest,
+    '/unauthorized': jsonHandler.noAuth,
     notFound: jsonHandler.notFound,
   },
 };
 
 function onRequest(request, response) {
   const parsedUrl = new url.URL(request.url, 'https://http-api-1-jayhors.herokuapp.com/');
-
   if (urlHandles[request.method][parsedUrl.pathname]) {
     urlHandles[request.method][parsedUrl.pathname](request, response);
   } else {

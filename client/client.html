@@ -23,9 +23,18 @@
           },
         };
         fetch(pageVal.value, options)
-          .then(response =>{
+          .then(async response =>{
             statustext = response.statusText;
-            return response.json();
+            let responseType = response.headers.get('Content-Type');
+            if(responseType === 'application/json'){
+              return response.json();
+            }
+            else{
+              let rawXml = await response.text();
+              let xmlResponse = await new DOMParser().parseFromString(rawXml, "text/xml");
+              let message = xmlResponse.querySelector('message').textContent;
+              return {message: message};
+            }
           })
           .then(jsoned =>{
             contentTag.innerHTML = `<b>${statustext}</b><p>${jsoned.message}</p>`;
